@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/home/frivermen/.config/bspwm'
+let g:netrw_dirhist_7='/home/frivermen/.config'
+let g:netrw_dirhist_6='/home/frivermen/.config/polybar'
+let g:netrw_dirhist_5='/home/frivermen/data/edu/1.Алгоритмизация и программирование 2020/ЛР/ЛР2_Рыбин_РИ-190006'
+let g:netrw_dirhist_4='/home/frivermen/data/edu/1.Алгоритмизация и программирование 2020/ЛР/ЛР4_Рыбин_РИ-190006'
+let g:netrw_dirhist_3='/home/frivermen/data/edu/1.Алгоритмизация и программирование 2020/ЛР'
+let g:netrw_dirhist_2='/home/frivermen/data/edu/1.Алгоритмизация и программирование 2020/ЛР/ЛР5_Рыбин_РИ-190006'
+let g:netrw_dirhist_1='/home/frivermen/hdddata/docs/edu/Алгоритмизация и программирование 2020/ЛР/ЛР2_Рыбин_РИ-190006'
