@@ -11,3 +11,5 @@
 alias poweroff='loginctl poweroff'
 alias reboot='loginctl reboot'
 #alias scr='maim -s | xclip -selection clipboard -t image/png -i'
+alias mount='udisksctl mount -b'
+alias unmount='udisksctl unmount -b'
