@@ -71,9 +71,9 @@ static const struct arg args[] = {
 	{ ram_perc, "R%s%% ", },
 	{ swap_perc, "S%s%% ", },
 //	{ keyboard_indicators, "%s ", "c?"},
-	{ temp, "%sC  ", "/sys/class/thermal/thermal_zone0/temp"},
+	{ temp, "%sC  ", "/sys/class/thermal/thermal_zone0/temp", },
 //  { vol_perc, "V%s%% ", "/dev/mixer"},
-	{ wifi_perc, "W%s%% ", "wlan0"},
+	{ wifi_perc, "W%s%% ", "wlan0", },
 //  { wifi_essid, "%s% ", "wlp2s0"},
-//  { battery_perc, "B%s%% ", "BAT0"}
+  { battery_perc, "B%s%% ", "BAT0", }
 };
