@@ -1,3 +1,4 @@
+source ~/.helix.vim
 call plug#begin('~/.vim/plugged')
 " sxhkd syntax
 "Plug 'kovetskiy/sxhkd-vim'
@@ -15,7 +16,7 @@ let g:vimtex_quickfix_mode = 0
 " colorscheme
 colorscheme gruvbox
 set bg=dark
-set colorcolumn=81
+set colorcolumn=121
 highlight ColorColumn ctermbg=darkgray 
 let g:python_recommended_style = 0
 au FileType python setlocal tabstop=2 shiftwidth=2 noexpandtab
