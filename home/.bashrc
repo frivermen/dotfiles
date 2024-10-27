@@ -7,7 +7,12 @@
 
 # alias ls='ls --color=auto'
 # alias grep='grep --color=auto'
-PS1='[\u@\h \W]\$ '
+# Set RED prompt
+# PS1="\[\e[01;31m\]$PS1\[\e[00m\]"
+# Set Green prompt
+PS1="\[\e[01;32m\]$PS1\[\e[00m\]"
+
+
 color_prompt=yes
 alias poweroff='loginctl poweroff'
 alias reboot='loginctl reboot'
