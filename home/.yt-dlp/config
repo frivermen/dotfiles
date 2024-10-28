@@ -1,0 +1,1 @@
+-f "bv*[height<=1080][vcodec~='^((he|a)vc|h26[54])']+ba[acodec^=mp4a]"
