@@ -1,0 +1,42 @@
+conky.config = {
+    alignment = 'bottom_right',
+    background = true,
+    cpu_avg_samples = 1,
+    double_buffer = true,
+    draw_shades = false,
+    gap_x = 30,
+    gap_y = 90,
+    own_window = true,
+    own_window_class = 'Conky',
+    own_window_type = 'utility',
+    own_window_hints = 'above',
+    own_window_transparent = true,
+    own_window_argb_visual = true,
+    own_window_argb_value = 255,
+    default_color = '7f7f7f',
+    update_interval = 1.0,
+    use_xft = true,
+    font = 'Terminus:size=12',
+    minimum_width = 100
+}
+
+conky.text = [[
+CPU Usage: $cpu%
+CPU Temp: ${acpitemp}°C
+$alignc${freq 1}MHz ${freq 2}MHz
+$alignc${freq 3}MHz ${freq 4}MHz
+$alignc${freq 5}MHz ${freq 6}MHz
+$alignc ${cpubar cpu1 10,60} ${cpubar cpu2 10,60} 
+$alignc ${cpubar cpu3 10,60} ${cpubar cpu4 10,60} 
+$alignc ${cpubar cpu5 10,60} ${cpubar cpu6 10,60} 
+Disk Usage(/):
+${diskio /dev/sdb}
+$alignc${diskiograph /dev/sdb 50,130 -t}
+Disk Usage(/1tb):
+${diskio /dev/sda}
+$alignc${diskiograph /dev/sda 50,130 -t}
+RAM Usage: $memperc%
+$mem / $memmax
+$alignc${membar 10,130}
+]]
+
