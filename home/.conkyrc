@@ -1,11 +1,29 @@
+w = 160;
+local function interp (s, t)
+    return s:gsub('(#%b{})', function (w)
+        return t[w:sub(3, -2)] or w
+    end)
+end
+
 conky.config = {
-    alignment = 'bottom_right',
     background = true,
-    cpu_avg_samples = 1,
-    double_buffer = true,
-    draw_shades = false,
+    update_interval = 1.0,
+
+    alignment = 'bottom_right',
+    use_xft = true,
+    font = 'Terminus:size=12',
     gap_x = 30,
     gap_y = 90,
+    minimum_width = w,
+    border_inner_margin = 5,
+
+    default_bar_height = 10,
+    default_bar_width = 0,
+    default_graph_height = 50,
+    default_graph_width = 0,
+    show_graph_scale = true,
+    short_units = true,
+
     own_window = true,
     own_window_class = 'Conky',
     own_window_type = 'utility',
@@ -13,30 +31,38 @@ conky.config = {
     own_window_transparent = true,
     own_window_argb_visual = true,
     own_window_argb_value = 255,
+
     default_color = '7f7f7f',
-    update_interval = 1.0,
-    use_xft = true,
-    font = 'Terminus:size=12',
-    minimum_width = 100
+    draw_shades = false,
+    double_buffer = true,
 }
 
-conky.text = [[
-CPU Usage: $cpu%
-CPU Temp: ${acpitemp}°C
-$alignc${freq 1}MHz ${freq 2}MHz
-$alignc${freq 3}MHz ${freq 4}MHz
-$alignc${freq 5}MHz ${freq 6}MHz
-$alignc ${cpubar cpu1 10,60} ${cpubar cpu2 10,60} 
-$alignc ${cpubar cpu3 10,60} ${cpubar cpu4 10,60} 
-$alignc ${cpubar cpu5 10,60} ${cpubar cpu6 10,60} 
-Disk Usage(/):
-${diskio /dev/sdb}
-$alignc${diskiograph /dev/sdb 50,130 -t}
-Disk Usage(/1tb):
-${diskio /dev/sda}
-$alignc${diskiograph /dev/sda 50,130 -t}
-RAM Usage: $memperc%
-$mem / $memmax
-$alignc${membar 10,130}
-]]
+conky.text = interp([[
+CPU: ${acpitemp}C ${freq_g}GHz $alignr$cpu%
+${cpubar cpu1 10,#{hw}}${offset 2}${cpubar cpu2 10,#{hw}}
+${cpubar cpu3 10,#{hw}}${offset 2}${cpubar cpu4 10,#{hw}}
+${cpubar cpu5 10,#{hw}}${offset 2}${cpubar cpu6 10,#{hw}}
 
+${cpubar cpu1 10,#{tw}}${offset 2}${cpubar cpu2 10,#{tw}}${offset 2}${cpubar cpu3 10,#{tw}}
+${cpubar cpu4 10,#{tw}}${offset 2}${cpubar cpu5 10,#{tw}}${offset 2}${cpubar cpu6 10,#{tw}}
+
+${cpubar cpu1 10,#{qw}}${offset 2}${cpubar cpu2 10,#{qw}}${offset 2}${cpubar cpu3 10,#{qw}}${offset 2}${cpubar cpu4 10,#{qw}}
+${cpubar cpu5 10,#{qw}}${offset 2}${cpubar cpu6 10,#{qw}}
+$alignc${freq_g 1}GHz ${freq_g 2}GHz
+$alignc${freq_g 3}GHz ${freq_g 4}GHz
+$alignc${freq_g 5}GHz ${freq_g 6}GHz
+${cpugraph}
+/: ${fs_used_perc /}% ${alignr}av. ${fs_free /}
+${diskiograph /dev/sdb}
+/1tb: ${fs_used_perc /1tb}% ${alignr}av. ${fs_free /1tb}
+${diskiograph /dev/sda}
+RAM: $memperc% ${alignr}$mem/$memmax
+$membar
+Swap: $swapperc% ${alignr}$swap/$swapmax
+$swapbar
+]], {
+    w = w, 
+    hw = (w / 2) - 1,
+    tw = (w / 3) - 1,
+    qw = (w / 4) - 1,
+})
