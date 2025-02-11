@@ -38,7 +38,7 @@ conky.config = {
 }
 
 conky.text = interp([[
-CPU: ${acpitemp}C ${freq_g}GHz $alignr$cpu%
+CPU: ${hwmon 1 temp 1}C ${freq_g}GHz $alignr$cpu%
 ${cpubar cpu1 10,#{hw}}${offset 2}${cpubar cpu2 10,#{hw}}
 ${cpubar cpu3 10,#{hw}}${offset 2}${cpubar cpu4 10,#{hw}}
 ${cpubar cpu5 10,#{hw}}${offset 2}${cpubar cpu6 10,#{hw}}
