@@ -1,8 +1,22 @@
-w = 160;
-local function interp (s, t)
-    return s:gsub('(#%b{})', function (w)
-        return t[w:sub(3, -2)] or w
-    end)
+file = io.popen("nproc")
+ncpus = file:read("*n")
+file:close()
+
+w = 160
+cols = 3
+barlen = (w // cols) - 1
+showcpu = ""
+for i = 1,ncpus do
+  showcpu = showcpu.."${cpubar cpu"..i.." 10,"..barlen.."}"
+  if i % cols == 0 then
+    if i ~= ncpus then showcpu = showcpu.."\n" end
+  else
+    showcpu = showcpu.."${offset 2}"
+  end
+end
+
+local function interp (s)
+    return s:gsub("#{drawcpus}", showcpu)
 end
 
 conky.config = {
@@ -39,15 +53,7 @@ conky.config = {
 
 conky.text = interp([[
 CPU: ${hwmon 1 temp 1}C ${freq_g}GHz $alignr$cpu%
-${cpubar cpu1 10,#{hw}}${offset 2}${cpubar cpu2 10,#{hw}}
-${cpubar cpu3 10,#{hw}}${offset 2}${cpubar cpu4 10,#{hw}}
-${cpubar cpu5 10,#{hw}}${offset 2}${cpubar cpu6 10,#{hw}}
-
-${cpubar cpu1 10,#{tw}}${offset 2}${cpubar cpu2 10,#{tw}}${offset 2}${cpubar cpu3 10,#{tw}}
-${cpubar cpu4 10,#{tw}}${offset 2}${cpubar cpu5 10,#{tw}}${offset 2}${cpubar cpu6 10,#{tw}}
-
-${cpubar cpu1 10,#{qw}}${offset 2}${cpubar cpu2 10,#{qw}}${offset 2}${cpubar cpu3 10,#{qw}}${offset 2}${cpubar cpu4 10,#{qw}}
-${cpubar cpu5 10,#{qw}}${offset 2}${cpubar cpu6 10,#{qw}}
+#{drawcpus}
 $alignc${freq_g 1}GHz ${freq_g 2}GHz
 $alignc${freq_g 3}GHz ${freq_g 4}GHz
 $alignc${freq_g 5}GHz ${freq_g 6}GHz
@@ -60,9 +66,4 @@ RAM: $memperc% ${alignr}$mem/$memmax
 $membar
 Swap: $swapperc% ${alignr}$swap/$swapmax
 $swapbar
-]], {
-    w = w, 
-    hw = (w / 2) - 1,
-    tw = (w / 3) - 1,
-    qw = (w / 4) - 1,
-})
+]])
