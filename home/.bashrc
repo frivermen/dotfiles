@@ -61,3 +61,10 @@ n ()
     }
 }
 
+lc() {
+    if [ -z "$2" ]; then
+        lua -e "print(string.format('%.2f', $1))"  # по умолчанию 2 знака
+    else
+        lua -e "print(string.format('%.${2}f', $1))"  # кастомный scale
+    fi
+}
