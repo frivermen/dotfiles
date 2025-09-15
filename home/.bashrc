@@ -20,8 +20,9 @@ alias mount='udisksctl mount -b'
 alias bs='cat ~/.bash_history | grep'
 alias feh='feh -.Z $@'
 alias 7z='7z -mx9 $@'
-alias cp="/usr/local/bin/cpg -g"
-alias mv="/usr/local/bin/mvg -g"
+alias hx="helix"
+alias cp="/usr/bin/cpg -g"
+alias mv="/usr/bin/mvg -g"
 
 export HISTSIZE=9000
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r;"
@@ -53,7 +54,7 @@ n ()
 
     # The command builtin allows one to alias nnn to n, if desired, without
     # making an infinitely recursive alias
-    command nnn -d "$@"
+    command nnn -e -x -d -r "$@"
 
     [ ! -f "$NNN_TMPFILE" ] || {
         . "$NNN_TMPFILE"
