@@ -11,6 +11,7 @@
 # PS1="\[\e[01;31m\]$PS1\[\e[00m\]"
 # Set Green prompt
 PS1="\[\e[01;32m\]$PS1\[\e[00m\]"
+PATH="$PATH:~/bin"
 
 
 color_prompt=yes
