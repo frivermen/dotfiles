@@ -70,3 +70,51 @@ lc() {
         lua -e "print(string.format('%.${2}f', $1))"  # кастомный scale
     fi
 }
+
+u() { 
+    local mount_dir="/run/media/frivermen"
+    local drives=()
+    local choice selected i
+    
+    # Check if mount directory exists
+    [[ -d "$mount_dir" ]] || { echo "Mount directory not found"; return 1; }
+    
+    # Get list of flash drives
+    for dir in "$mount_dir"/*; do
+        [[ -d "$dir" ]] && drives+=("$dir")
+    done
+    
+    # Check if any drives found
+    if [[ ${#drives[@]} -eq 0 ]]; then
+        echo "No flash drives connected"
+        return 0
+    fi
+    
+    # Display list
+    echo "Connected flash drives:"
+    for i in "${!drives[@]}"; do
+        echo "$((i+1)). ${drives[i]##*/}"
+    done
+    
+    # Get user choice
+    read -p "Select drive to unmount (1-${#drives[@]}, or 0 to cancel): " choice
+    
+    # Validate input
+    if [[ ! "$choice" =~ ^[0-9]+$ ]] || [[ "$choice" -gt ${#drives[@]} ]]; then
+        echo "Invalid selection"
+        return 1
+    fi
+    
+    [[ "$choice" -eq 0 ]] && { echo "Cancelled"; return 0; }
+    
+    # Unmount selected drive
+    selected="${drives[$((choice-1))]}"
+    echo "Unmounting $selected..."
+    if umount "$selected"; then
+        echo "Successfully unmounted"
+        rmdir "$selected" 2>/dev/null && echo "Directory removed"
+    else
+        echo "Unmount failed"
+        return 1
+    fi
+}
