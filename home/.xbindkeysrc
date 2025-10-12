@@ -1,0 +1,7 @@
+"setxkbmap us,ru"
+    m:0x0 + c:108
+    Alt_R
+
+"setxkbmap ru,us"
+    m:0x0 + c:107
+    Print

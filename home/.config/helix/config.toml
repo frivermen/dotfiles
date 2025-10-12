@@ -30,3 +30,5 @@ render = true
 
 [keys.insert]
 "C-[" = "normal_mode"
+esc = "no_op"
+backspace = "no_op"
