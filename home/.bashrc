@@ -7,10 +7,14 @@
 
 # alias ls='ls --color=auto'
 # alias grep='grep --color=auto'
-# Set RED prompt
-# PS1="\[\e[01;31m\]$PS1\[\e[00m\]"
-# Set Green prompt
-PS1="\[\e[01;32m\]$PS1\[\e[00m\]"
+
+GREEN='\[\e[01;32m\]'
+RED='\[\e[01;31m\]'
+RESET='\[\e[00m\]'
+# if root ? set red : set green
+(( EUID == 0 )) && MAIN=$RED || MAIN=$GREEN
+PS1='[\t] '$MAIN'[\u] '$RESET'in '$MAIN'[\w]\n \$ '$RESET
+
 PATH="$PATH:~/bin"
 
 
