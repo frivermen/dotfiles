@@ -28,7 +28,13 @@ hidden = false
 [editor.indent-guides]
 render = true
 
+[editor.whitespace.render]
+space = "all"
+tab = "all"
+
+[keys.normal]
+"C-l" = [":write", ":run-shell-command make | tee ~/.myfifo"]
+
 [keys.insert]
 "C-[" = "normal_mode"
-esc = "no_op"
-backspace = "no_op"
+"S-ret" = "open_below"
